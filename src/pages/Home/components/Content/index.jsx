@@ -14,7 +14,7 @@ const Content = (props) => {
                 }
             </div>
             <div css={style.ContentBottom}>
-                <Button primary size="default" onClick={props.fetchPokemonListing}>Load More</Button>
+                <Button type="primary" size="default" onClick={() => {props.fetchPokemonListing(props.nextUrl)}}>Load More</Button>
             </div>
         </div>
     )

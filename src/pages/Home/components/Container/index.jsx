@@ -5,7 +5,8 @@ import Content from '../Content/index.jsx'
 function Home() {
     const {
         fetchPokemonListing,
-        pokemonList
+        pokemonList,
+        nextUrl
     } = usePokemonListing();
 
     return <div>
@@ -13,6 +14,7 @@ function Home() {
         <Content 
             fetchPokemonListing={fetchPokemonListing}
             pokemonList={pokemonList}
+            nextUrl={nextUrl}
         />
     </div>
 }
