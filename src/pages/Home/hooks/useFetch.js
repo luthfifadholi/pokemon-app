@@ -5,6 +5,7 @@ import { message } from 'antd';
 const useFetch = () => {
     const [ pokemonList, setPokemonList ] = useState([])
     const [ nextUrl, setNextUrl ] = useState(undefined)
+    const totalPokemonOwned = localStorage.getItem('pokemonOwned') ? JSON.parse(localStorage.getItem('pokemonOwned')).length : [];
 
     const fetchPokemonListing = useCallback(
         async (next) => {
@@ -24,6 +25,7 @@ const useFetch = () => {
     }, [fetchPokemonListing])
     
     return {
+        totalPokemonOwned,
         fetchPokemonListing,
         pokemonList,
         nextUrl

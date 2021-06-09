@@ -24,6 +24,13 @@ const style = {
     ContentBottom: css`
         display: flex;
         justify-content: center;
+    `,
+    Total: css`
+        font-size: 18px;
+        font-weight: 700;
+        @media only screen and (max-width: 767px) {
+            font-size: 16px
+        }
     `
 }
 

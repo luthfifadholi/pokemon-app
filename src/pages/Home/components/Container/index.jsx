@@ -4,6 +4,7 @@ import Content from '../Content/index.jsx'
 
 function Home() {
     const {
+        totalPokemonOwned,
         fetchPokemonListing,
         pokemonList,
         nextUrl
@@ -13,6 +14,7 @@ function Home() {
         <>
             <Header title="Pokedex" showBackIcon={false} />
             <Content 
+                totalPokemonOwned={totalPokemonOwned}
                 fetchPokemonListing={fetchPokemonListing}
                 pokemonList={pokemonList}
                 nextUrl={nextUrl}
