@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import style from './style'
-import { Modal, Button, Input, List, Card } from 'antd';
+import { Modal, Button, Input, Divider, Tag } from 'antd';
 import { normalizerPokemonDetail } from '../../normalizer'
 import { capitalizeEachWord, removeHyphens } from '../../../../utils/string'
 import useCatch from '../../hooks/useCatch'
@@ -15,17 +15,6 @@ const Content = (props) => {
         isModalVisible 
     } = useCatch();
 
-    const listData = [
-        {
-            title: 'Abilities',
-            data: data.abilities
-        },
-        {
-            title: 'Moves',
-            data: data.moves
-        }
-    ];
-
     return (
         <div css={style.ContentBox}>
             <img src={data.image} alt={data.name} css={style.Image} />
@@ -33,6 +22,7 @@ const Content = (props) => {
                 <Button size="default" onClick={() => { catchPokemon(data) }}>Catch</Button>
             </div>
             <h1 css={style.Name}>{ data.name }</h1>
+            
             <div css={style.TypeContainer}>
                 {
                     data.types.map((list, index) => {
@@ -42,40 +32,46 @@ const Content = (props) => {
                     })
                 }
             </div>
-            <List
-                grid={{
-                    gutter: 16,
-                    xs: 1,
-                    sm: 2,
-                    md: 2,
-                    lg: 2,
-                    xl: 2,
-                    xxl: 2,
-                }}
-                dataSource={listData}
-                renderItem={(item) => (
-                    <List.Item>
-                        <Card title={item.title}>
-                            {
-                                item.data.map((list, index) => {
-                                    return (
-                                        <div key={index}>{ capitalizeEachWord(removeHyphens(list.name)) }</div>
-                                    )
-                                })
-                            }
-                        </Card>
-                    </List.Item>
-                )}
-            />
+
+            <Divider orientation="center">Stats</Divider>
+            <div css={style.TextCenter}>
+                {
+                    data.stats.map((list, index) => {
+                        return (
+                            <Tag color="orange" key={index} css={style.TagList}>{ capitalizeEachWord(removeHyphens(list.name)) } : { list.value }</Tag>
+                        )
+                    })
+                }
+            </div>
+
+            <Divider orientation="center">Abilities</Divider>
+            <div css={style.TextCenter}>
+                {
+                    data.abilities.map((list, index) => {
+                        return <Tag color="magenta" key={index} css={style.TagList}>{ capitalizeEachWord(removeHyphens(list.name)) }</Tag>
+                    })
+                }
+            </div>
+
+            <Divider orientation="center">Moves</Divider>
+            <div css={style.TextCenter}>
+                {
+                    data.moves.map((list, index) => {
+                        return <Tag color="purple" key={index} css={style.TagList}>{ capitalizeEachWord(removeHyphens(list.name)) }</Tag>
+                    })
+                }
+            </div>
+
             <Modal 
                 visible={isModalVisible} 
-                title="Give Nickname" 
+                title="Caught!" 
                 onOk={() => { submitPokemon(data) }} 
                 okText="Save" 
                 cancelButtonProps={{ style: { display: 'none' } }} 
                 maskClosable={false}
                 closable={false}
             >
+                <p>Give a nickname for your pokemon</p>
                 <Input type="text" name="name" value={inputValue} onChange={(event) => { onChangeInput(event) }} />
             </Modal>
         </div>

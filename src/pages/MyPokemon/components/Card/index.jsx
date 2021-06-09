@@ -10,8 +10,13 @@ const Card = (props) => {
     return (
         <div css={ style.CardBox }>
             <img src={ data.image } alt={ data.name } css={ style.Image } />
-            <p css={ style.NickName }>{ data.nickname }</p>
+            <p css={ style.Title }>Name</p>
             <p css={ style.Name }>{ data.name }</p>
+
+            <p css={ style.Title }>Nickname</p>
+            <p css={ style.Name }>{ data.nickname }</p>
+
+            <p css={ style.Title }>Types</p>
             {
                 data.types.map((list, index) => {
                     return <span key={ index } css={ style.Type }>{ list.name }</span>

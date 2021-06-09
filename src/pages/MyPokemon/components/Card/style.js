@@ -7,17 +7,17 @@ const style = {
         border-radius: 5px;
         border: 1px solid #efefef;
     `,
-    Name: css`
+    Title: css`
         text-transform: capitalize;
-        font-size: 18px;
-        font-weight: 600;
-        margin: 0 0 15px;
+        font-size: 12px;
+        margin: 0;
         color: #2a2a2a;
     `,
-    NickName: css`
+    Name: css`
         text-transform: capitalize;
-        font-size: 14px;
-        margin: 10px 0 0;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 0 0 10px;
         color: #2a2a2a;
     `,
     Image: css`
@@ -25,6 +25,7 @@ const style = {
         display: block;
         border-radius: 5px;
         background-color: #efefef;
+        margin-bottom: 10px;
     `,
     Type: css`
         padding: 3px 7px;

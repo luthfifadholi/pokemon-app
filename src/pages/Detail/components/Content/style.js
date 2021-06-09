@@ -35,6 +35,12 @@ const style = {
         font-size: 12px;
         margin-right: 5px;
         text-transform: capitalize;
+    `,
+    TagList: css`
+        margin-bottom: 8px;
+    `,
+    TextCenter: css`
+        text-align: center;
     `
 }
 
