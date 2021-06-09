@@ -3,14 +3,14 @@ import Content from '../Content/index.jsx'
 import usePokemonDetail from '../../hooks/usePokemonDetail'
 
 function Detail() {
-    const {
-        pokemonDetail
-    } = usePokemonDetail();
+    const { pokemonDetail } = usePokemonDetail();
 
-    return <div>
-        <Header />
-        <Content data={pokemonDetail} />
-    </div>
+    return (
+        <>
+            <Header />
+            <Content data={pokemonDetail} />
+        </>
+    )
 }
 
 export default Detail;

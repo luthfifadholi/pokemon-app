@@ -1,6 +1,7 @@
-import { getPokemonDetail } from '../service'
 import { useState, useEffect, useCallback } from 'react'
+import { getPokemonDetail } from '../service'
 import { useParams } from "react-router-dom";
+import { message } from 'antd';
 
 const usePokemonDetail = () => {
     const [ pokemonDetail, setPokemonDetail ] = useState({})
@@ -12,7 +13,7 @@ const usePokemonDetail = () => {
                 const response = await getPokemonDetail(id)
                 setPokemonDetail(response.data)
             } catch (err) {
-                console.error(err)
+                message.error(`Failed to fetch data`);
             }
         },[id]
     );

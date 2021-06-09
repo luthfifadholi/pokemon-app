@@ -1,5 +1,6 @@
-import { getPokemonList } from '../service'
 import { useState, useEffect, useCallback } from 'react'
+import { getPokemonList } from '../service'
+import { message } from 'antd';
 
 const usePokemonListing = () => {
     const [ pokemonList, setPokemonList ] = useState([])
@@ -13,7 +14,7 @@ const usePokemonListing = () => {
                 setPokemonList((pokemonList)=>{return pokemonList.concat(response.data.results)});
                 setNextUrl(response.data.next)
             } catch(err) {
-                console.error(err)
+                message.error(`Failed to fetch data`);
             }
         },[]
     );

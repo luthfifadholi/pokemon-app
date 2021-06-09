@@ -9,14 +9,16 @@ function Home() {
         nextUrl
     } = usePokemonListing();
 
-    return <div>
-        <Header />
-        <Content 
-            fetchPokemonListing={fetchPokemonListing}
-            pokemonList={pokemonList}
-            nextUrl={nextUrl}
-        />
-    </div>
+    return (
+        <>
+            <Header />
+            <Content 
+                fetchPokemonListing={fetchPokemonListing}
+                pokemonList={pokemonList}
+                nextUrl={nextUrl}
+            />
+        </>
+    )
 }
 
 export default Home;

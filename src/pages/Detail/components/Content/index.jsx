@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import style from './style'
-import { Modal, Button, Input, List, Card } from 'antd';
+import { Modal, Button, Input, List, Card, message } from 'antd';
 import { useState } from 'react'
 import { normalizerCatchPokemon, normalizerPokemonDetail } from '../../normalizer'
 import { capitalizeEachWord, removeHyphens } from '../../../../utils/string'
@@ -36,6 +36,8 @@ const Content = (props) => {
         const result = Math.floor(Math.random() * 2);
         if(result === 1) {
             setIsModalVisible(true);
+        }else{
+            message.error(`Failed to catch ${data.name}`);
         }
     }
 
@@ -48,12 +50,11 @@ const Content = (props) => {
     
             setIsModalVisible(false);
             setInputValue('')
+            message.success(`Success to catch ${data.name}!`);
         }else{
-            console.log('error nickname')
+            message.error(`Nickname already in use`);
         }
     }
-
-    
     
     const onChangeInput = (event) => {
         setInputValue(event.target.value);
@@ -63,7 +64,7 @@ const Content = (props) => {
         <div css={style.ContentBox}>
             <img src={data.image} alt={data.name} css={style.Image} />
             <div css={style.ButtonContainer}>
-                <Button size="default" onClick={catchPokemon}>Catch</Button>
+                <Button size="default" onClick={() => {catchPokemon()}}>Catch</Button>
             </div>
             <h1 css={style.Name}>{ data.name }</h1>
             <div css={style.TypeContainer}>
@@ -75,7 +76,6 @@ const Content = (props) => {
                     })
                 }
             </div>
-
             <List
                 grid={{
                     gutter: 16,
@@ -87,7 +87,7 @@ const Content = (props) => {
                     xxl: 2,
                 }}
                 dataSource={listData}
-                renderItem={(item,index) => (
+                renderItem={(item) => (
                     <List.Item>
                         <Card title={item.title}>
                             {
@@ -101,7 +101,6 @@ const Content = (props) => {
                     </List.Item>
                 )}
             />
-
             <Modal 
                 visible={isModalVisible} 
                 title="Give Nickname" 

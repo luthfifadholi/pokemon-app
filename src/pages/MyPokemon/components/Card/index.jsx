@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import style from './style'
-import { Modal, Button } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 
 const { confirm } = Modal;
@@ -24,10 +24,11 @@ const Card = (props) => {
         owned.splice(props.index, 1)
         localStorage.setItem('pokemonOwned', JSON.stringify(owned))
         props.setOwnedPokemon(owned)
+        message.success(`Success to release ${data.nickname}`);
     }
 
     return (
-        <div css={style.CardBox} to={`/pokemon/${data.id}`}>
+        <div css={style.CardBox}>
             <img src={data.image} alt={data.name} css={style.Image} />
             <p css={style.NickName}>{ data.nickname }</p>
             <p css={style.Name}>{ data.name }</p>
