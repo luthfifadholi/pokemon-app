@@ -3,7 +3,7 @@ import { getPokemonDetail } from '../service'
 import { useParams } from "react-router-dom";
 import { message } from 'antd';
 
-const usePokemonDetail = () => {
+const useFetch = () => {
     const [ pokemonDetail, setPokemonDetail ] = useState({})
     const { id } = useParams()
     
@@ -27,4 +27,4 @@ const usePokemonDetail = () => {
     }
 }
 
-export default usePokemonDetail;
+export default useFetch;

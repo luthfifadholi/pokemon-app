@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { getPokemonList } from '../service'
 import { message } from 'antd';
 
-const usePokemonListing = () => {
+const useFetch = () => {
     const [ pokemonList, setPokemonList ] = useState([])
     const [ nextUrl, setNextUrl ] = useState(undefined)
 
@@ -30,4 +30,4 @@ const usePokemonListing = () => {
     }
 }
 
-export default usePokemonListing;
+export default useFetch;

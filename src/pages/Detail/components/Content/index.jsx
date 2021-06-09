@@ -1,15 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import style from './style'
-import { Modal, Button, Input, List, Card, message } from 'antd';
-import { useState } from 'react'
-import { normalizerCatchPokemon, normalizerPokemonDetail } from '../../normalizer'
+import { Modal, Button, Input, List, Card } from 'antd';
+import { normalizerPokemonDetail } from '../../normalizer'
 import { capitalizeEachWord, removeHyphens } from '../../../../utils/string'
+import useCatch from '../../hooks/useCatch'
 
 const Content = (props) => {
     const data = normalizerPokemonDetail(props.data)
-
-    const [ inputValue, setInputValue ] = useState('')
-    const [ isModalVisible, setIsModalVisible ] = useState(false);
+    const { 
+        catchPokemon, 
+        submitPokemon, 
+        inputValue, 
+        onChangeInput,
+        isModalVisible 
+    } = useCatch();
 
     const listData = [
         {
@@ -22,49 +26,11 @@ const Content = (props) => {
         }
     ];
 
-    const validateNickname = () => {
-        let owned = localStorage.getItem('pokemonOwned') ? JSON.parse(localStorage.getItem('pokemonOwned')) : [];
-        let filtered = owned.filter(list => list.nickname.toLowerCase() === inputValue.toLowerCase())
-        if(filtered.length > 0) {
-            return false
-        }else{
-            return true
-        }
-    }
-    
-    const catchPokemon = () => {
-        const result = Math.floor(Math.random() * 2);
-        if(result === 1) {
-            setIsModalVisible(true);
-        }else{
-            message.error(`Failed to catch ${data.name}`);
-        }
-    }
-
-    const submitPokemon = () => {
-        let owned = localStorage.getItem('pokemonOwned') ? JSON.parse(localStorage.getItem('pokemonOwned')) : [];
-        if(validateNickname()) {
-            const _data = normalizerCatchPokemon(data, inputValue)
-            owned = [...owned, ..._data];
-            localStorage.setItem('pokemonOwned', JSON.stringify(owned))
-    
-            setIsModalVisible(false);
-            setInputValue('')
-            message.success(`Success to catch ${data.name}!`);
-        }else{
-            message.error(`Nickname already in use`);
-        }
-    }
-    
-    const onChangeInput = (event) => {
-        setInputValue(event.target.value);
-    };
-
     return (
         <div css={style.ContentBox}>
             <img src={data.image} alt={data.name} css={style.Image} />
             <div css={style.ButtonContainer}>
-                <Button size="default" onClick={() => {catchPokemon()}}>Catch</Button>
+                <Button size="default" onClick={() => { catchPokemon(data) }}>Catch</Button>
             </div>
             <h1 css={style.Name}>{ data.name }</h1>
             <div css={style.TypeContainer}>
@@ -104,13 +70,13 @@ const Content = (props) => {
             <Modal 
                 visible={isModalVisible} 
                 title="Give Nickname" 
-                onOk={submitPokemon} 
+                onOk={() => { submitPokemon(data) }} 
                 okText="Save" 
                 cancelButtonProps={{ style: { display: 'none' } }} 
                 maskClosable={false}
                 closable={false}
             >
-                <Input type="text" name="name" onChange={onChangeInput} value={inputValue} />
+                <Input type="text" name="name" value={inputValue} onChange={(event) => { onChangeInput(event) }} />
             </Modal>
         </div>
     )

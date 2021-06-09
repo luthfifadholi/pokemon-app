@@ -1,13 +1,13 @@
 import Header from '../../../../components/Header/index.jsx'
 import Content from '../Content/index.jsx'
-import usePokemonDetail from '../../hooks/usePokemonDetail'
+import useFetch from '../../hooks/useFetch'
 
 function Detail() {
-    const { pokemonDetail } = usePokemonDetail();
+    const { pokemonDetail } = useFetch();
 
     return (
         <>
-            <Header />
+            <Header title="Detail" showBackIcon={true} />
             <Content data={pokemonDetail} />
         </>
     )

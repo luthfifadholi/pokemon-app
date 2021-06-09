@@ -4,7 +4,7 @@ import Content from '../Content/index.jsx'
 const MyPokemon = () => {
     return (
         <>
-            <Header />
+            <Header title="My Pokemon" showBackIcon={false} />
             <Content />
         </>
     )

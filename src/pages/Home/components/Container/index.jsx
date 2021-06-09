@@ -1,4 +1,4 @@
-import usePokemonListing from '../../hooks/usePokemonListing'
+import useFetch from '../../hooks/useFetch'
 import Header from '../../../../components/Header/index.jsx'
 import Content from '../Content/index.jsx'
 
@@ -7,11 +7,11 @@ function Home() {
         fetchPokemonListing,
         pokemonList,
         nextUrl
-    } = usePokemonListing();
+    } = useFetch();
 
     return (
         <>
-            <Header />
+            <Header title="Pokedex" showBackIcon={false} />
             <Content 
                 fetchPokemonListing={fetchPokemonListing}
                 pokemonList={pokemonList}

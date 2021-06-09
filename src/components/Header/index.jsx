@@ -1,21 +1,29 @@
 /** @jsxImportSource @emotion/react */
 import style from './style'
-import {  UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import { UnorderedListOutlined, UserOutlined } from '@ant-design/icons';
+import { ArrowLeftOutlined } from '@ant-design/icons';
 
-const Header = () => {
+const Header = ({ title, showBackIcon }) => {
+    const backToPreviousPage = () => {
+        window.history.back();
+    }
+
     return (
-        <header css={style.HeaderContainer}>
-            <p css={style.HeaderTitle}>Pokemon</p>
-            <div css={style.HeaderMenu}>
-                <Link css={style.HeaderMenuList} to={`/`}>
-                    <UnorderedListOutlined />
-                </Link>
-                <Link css={style.HeaderMenuList} to={`/mypokemon`}>
-                    <UserOutlined />
-                </Link>  
-            </div>
-        </header>
+        <div css={ style.HeaderContainer }>
+            <header css={ style.Header }>
+                { showBackIcon ? <span css={ style.HeaderIcon } onClick={() => { backToPreviousPage() }}><ArrowLeftOutlined /></span> : null }
+                <p css={ style.HeaderTitle }>{ title }</p>
+                <div css={ style.HeaderMenu }>
+                    <Link css={ style.HeaderMenuList } to={`/`}>
+                        <UnorderedListOutlined />
+                    </Link>
+                    <Link css={ style.HeaderMenuList } to={`/mypokemon`}>
+                        <UserOutlined />
+                    </Link>  
+                </div>
+            </header>
+        </div>
     )
 }
 
